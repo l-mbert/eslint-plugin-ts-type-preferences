@@ -55,9 +55,9 @@ type User = WithId & {
 **Valid (after fix)**
 
 ```ts
-interface WithId {
+type WithId = {
   id: string;
-}
+};
 
 interface User extends WithId {
   name: string;
@@ -79,13 +79,8 @@ type Record = Audited &
 **Valid (after fix)**
 
 ```ts
-interface Audited {
-  createdAt: Date;
-}
-
-interface SoftDelete {
-  deletedAt?: Date;
-}
+type Audited = { createdAt: Date };
+type SoftDelete = { deletedAt?: Date };
 
 interface Record extends Audited, SoftDelete {
   id: string;
@@ -108,10 +103,10 @@ type Users = Paginated<User> & {
 **Valid (after fix)**
 
 ```ts
-interface Paginated<T> {
+type Paginated<T> = {
   items: T[];
   total: number;
-}
+};
 
 interface Users extends Paginated<User> {
   page: number;
