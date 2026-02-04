@@ -1,7 +1,15 @@
 {
   "name": "eslint-plugin-ts-type-preferences",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ESLint plugin for TypeScript with two rules: prefer interface extends over type intersection and prefer merged type literal over intersection",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/l-mbert/eslint-plugin-ts-type-preferences.git"
+  },
+  "homepage": "https://github.com/l-mbert/eslint-plugin-ts-type-preferences",
+  "bugs": {
+    "url": "https://github.com/l-mbert/eslint-plugin-ts-type-preferences/issues"
+  },
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,7 +21,9 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE",
+    "README.md"
   ],
   "type": "module",
   "scripts": {
