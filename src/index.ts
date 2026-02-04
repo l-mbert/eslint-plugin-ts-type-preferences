@@ -8,11 +8,11 @@ export const rules = {
 
 export const configs = {
   recommended: {
-    plugins: ["prefer-interface-extends-over-type-intersection"],
+    plugins: ["ts-type-preferences"],
     rules: {
-      "prefer-interface-extends-over-type-intersection/prefer-interface-extends-over-type-intersection":
+      "ts-type-preferences/prefer-interface-extends-over-type-intersection":
         "error",
-      "prefer-interface-extends-over-type-intersection/prefer-merged-type-literal-over-intersection":
+      "ts-type-preferences/prefer-merged-type-literal-over-intersection":
         "error",
     },
   },
