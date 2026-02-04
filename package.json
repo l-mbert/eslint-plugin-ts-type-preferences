@@ -1,0 +1,56 @@
+{
+  "name": "eslint-plugin-ts-type-preferences",
+  "version": "1.0.0",
+  "description": "ESLint plugin for TypeScript with two rules: prefer interface extends over type intersection and prefer merged type literal over intersection",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:verbose": "vitest run --reporter verbose",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .ts",
+    "prepack": "pnpm build",
+    "prepublishOnly": "pnpm build"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "typescript",
+    "typescript-eslint",
+    "type-preferences",
+    "prefer-interface-extends",
+    "prefer-merged-type-literal"
+  ],
+  "author": "Lambert Weller",
+  "license": "MIT",
+  "packageManager": "pnpm@10.28.2",
+  "peerDependencies": {
+    "@typescript-eslint/utils": "^8.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@typescript-eslint/rule-tester": "^8.54.0",
+    "@typescript-eslint/typescript-estree": "^8.54.0",
+    "@typescript-eslint/utils": "8.54.0",
+    "eslint": "^9.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "5.9.3",
+    "vitest": "^1.0.0"
+  }
+}
