@@ -52,6 +52,10 @@ export default createRule<Options, MessageIds>({
         }
 
         const typeName = node.id.name;
+        const typeParamsText = node.typeParameters
+          ? sourceCode.getText(node.typeParameters)
+          : "";
+        const declarePrefix = node.declare ? "declare " : "";
         const mergedBodyText = buildMergedObjectTypeLiteralText(
           node,
           result.objectTypes,
@@ -67,7 +71,7 @@ export default createRule<Options, MessageIds>({
             const hasSemicolon =
               result.objectTypes.length > 1 || firstChars === ";";
             const semicolon = hasSemicolon ? ";" : "";
-            const replacementText = `type ${typeName} = ${mergedBodyText}${semicolon}`;
+            const replacementText = `${declarePrefix}type ${typeName}${typeParamsText} = ${mergedBodyText}${semicolon}`;
 
             return fixer.replaceText(node, replacementText);
           },

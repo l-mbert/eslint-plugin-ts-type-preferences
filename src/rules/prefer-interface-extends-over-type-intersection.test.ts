@@ -193,6 +193,31 @@ ruleTester.run("prefer-interface-extends-over-type-intersection", rule, {
       ],
     },
     {
+      name: "Exported generic type alias",
+      code: `
+        type Base = {};
+        export type Box<T extends Base = Base> = Base & {
+          value: T;
+        };
+      `,
+      output: `
+        type Base = {};
+        export interface Box<T extends Base = Base> extends Base {
+          value: T;
+        }
+      `,
+      errors: [
+        {
+          messageId: "preferInterfaceExtends",
+          data: {
+            name: "Box",
+            extendsName: "Base",
+            extendsNameIntersection: "Base & { ... }",
+          },
+        },
+      ],
+    },
+    {
       name: "Type intersection with qualified name (type & { ... fields ... })",
       code: `
         type A = Namespace.Base & {

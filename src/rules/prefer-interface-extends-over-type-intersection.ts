@@ -74,6 +74,10 @@ export default createRule<Options, MessageIds>({
         }
 
         const typeName = node.id.name;
+        const typeParamsText = node.typeParameters
+          ? sourceCode.getText(node.typeParameters)
+          : "";
+        const declarePrefix = node.declare ? "declare " : "";
 
         const extendsNames = result.extendsTypes
           .map((type) => getTypeName(type, sourceCode))
@@ -117,7 +121,7 @@ export default createRule<Options, MessageIds>({
               (mergeObjects && result.objectTypes.length > 1) ||
               firstChars === ";";
             const semicolon = hasSemicolon ? ";" : "";
-            const replacementText = `interface ${typeName}${extendsPart} ${interfaceBodyText}${semicolon}`;
+            const replacementText = `${declarePrefix}interface ${typeName}${typeParamsText}${extendsPart} ${interfaceBodyText}${semicolon}`;
 
             return fixer.replaceText(node, replacementText);
           },

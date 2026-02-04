@@ -63,6 +63,23 @@ ruleTester.run("prefer-merged-type-literal-over-intersection", rule, {
       ],
     },
     {
+      name: "Declared generic type alias preserves modifiers",
+      code: `
+        declare type Flags<T> = { a: T } & { b: T };
+      `,
+      output: `
+        declare type Flags<T> = {
+          a: T
+          b: T
+        };
+      `,
+      errors: [
+        {
+          messageId: "preferMergedTypeLiteral",
+        },
+      ],
+    },
+    {
       name: "Type intersection ({} & { ... fields ... })",
       code: `
         type A = {} & {
