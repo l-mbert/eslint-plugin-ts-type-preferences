@@ -189,6 +189,16 @@ When `true`, object literal types in the intersection are merged into the interf
 
 When `false`, the rule only converts intersections that contain at most one object literal type and at least one type reference. Intersections with multiple object literals are left unchanged.
 
+**Left untouched when `mergeObjects: false`**
+
+```ts
+type A = {
+  fieldA: string;
+} & {
+  fieldB: number;
+};
+```
+
 ### prefer-merged-type-literal-over-intersection
 
 No options.

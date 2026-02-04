@@ -31,24 +31,14 @@ ruleTester.run("prefer-interface-extends-over-type-intersection", rule, {
     {
       name: "Multiple object types with mergeObjects: false",
       code: `
-        type A = {
+        type Base = {};
+        type A = Base & {
           fieldA: string;
         } & {
           fieldB: number;
         };
       `,
       options: [{ mergeObjects: false }],
-    },
-    {
-      name: "Multiple object types with mergeObjects: true",
-      code: `
-        type A = {
-          fieldA: string;
-        } & {
-          fieldB: number;
-        };
-      `,
-      options: [{ mergeObjects: true }],
     },
     {
       name: "Intersection with unsupported type",
@@ -339,7 +329,7 @@ ruleTester.run("prefer-interface-extends-over-type-intersection", rule, {
       ],
     },
     {
-      name: "Type intersection (type & { ... fields ... } & { ... fields ... })",
+      name: "Type intersection with mergeObjects: true (type & { ... fields ... } & { ... fields ... })",
       code: `
         type A = {};
         type B = A & {
