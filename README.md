@@ -64,6 +64,60 @@ interface User extends WithId {
 }
 ```
 
+**Invalid (multiple bases)**
+
+```ts
+type Audited = { createdAt: Date };
+type SoftDelete = { deletedAt?: Date };
+
+type Record = Audited &
+  SoftDelete & {
+    id: string;
+  };
+```
+
+**Valid (after fix)**
+
+```ts
+interface Audited {
+  createdAt: Date;
+}
+
+interface SoftDelete {
+  deletedAt?: Date;
+}
+
+interface Record extends Audited, SoftDelete {
+  id: string;
+}
+```
+
+**Invalid (generic base)**
+
+```ts
+type Paginated<T> = {
+  items: T[];
+  total: number;
+};
+
+type Users = Paginated<User> & {
+  page: number;
+};
+```
+
+**Valid (after fix)**
+
+```ts
+interface Paginated<T> {
+  items: T[];
+  total: number;
+}
+
+interface Users extends Paginated<User> {
+  page: number;
+}
+```
+
 ### prefer-merged-type-literal-over-intersection
 
 **Invalid (multiple object intersections)**
@@ -82,6 +136,51 @@ type A = {
 type A = {
   fieldA: string;
   fieldB: number;
+};
+```
+
+**Invalid (methods and signatures)**
+
+```ts
+type Handler = {
+  handle(value: string): void;
+  [key: string]: number;
+  (): void;
+} & {
+  status: "ok" | "error";
+};
+```
+
+**Valid (after fix)**
+
+```ts
+type Handler = {
+  handle(value: string): void;
+  [key: string]: number;
+  (): void;
+  status: "ok" | "error";
+};
+```
+
+**Invalid (nested intersection)**
+
+```ts
+type Flags = ({
+  enabled: boolean;
+} & {
+  level: number;
+}) & {
+  label: string;
+};
+```
+
+**Valid (after fix)**
+
+```ts
+type Flags = {
+  enabled: boolean;
+  level: number;
+  label: string;
 };
 ```
 
@@ -115,12 +214,12 @@ import tsTypePreferences from "eslint-plugin-ts-type-preferences";
 export default [
   {
     plugins: {
-      "eslint-plugin-ts-type-preferences": tsTypePreferences,
+      "ts-type-preferences": tsTypePreferences,
     },
     rules: {
-      "eslint-plugin-ts-type-preferences/prefer-interface-extends-over-type-intersection":
+      "ts-type-preferences/prefer-interface-extends-over-type-intersection":
         "error",
-      "eslint-plugin-ts-type-preferences/prefer-merged-type-literal-over-intersection":
+      "ts-type-preferences/prefer-merged-type-literal-over-intersection":
         "error",
     },
   },
@@ -131,10 +230,10 @@ export default [
 
 ```json
 {
-  "plugins": ["eslint-plugin-ts-type-preferences"],
+  "plugins": ["ts-type-preferences"],
   "rules": {
-    "eslint-plugin-ts-type-preferences/prefer-interface-extends-over-type-intersection": "error",
-    "eslint-plugin-ts-type-preferences/prefer-merged-type-literal-over-intersection": "error"
+    "ts-type-preferences/prefer-interface-extends-over-type-intersection": "error",
+    "ts-type-preferences/prefer-merged-type-literal-over-intersection": "error"
   }
 }
 ```
@@ -143,7 +242,7 @@ export default [
 
 ```json
 {
-  "extends": ["plugin:eslint-plugin-ts-type-preferencesn/recommended"]
+  "extends": ["plugin:ts-type-preferences/recommended"]
 }
 ```
 
