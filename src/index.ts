@@ -1,12 +1,12 @@
 import preferInterfaceExtends from "./rules/prefer-interface-extends-over-type-intersection";
 import preferMergedTypeLiteral from "./rules/prefer-merged-type-literal-over-intersection";
 
-export const rules = {
+const rules = {
   "prefer-interface-extends-over-type-intersection": preferInterfaceExtends,
   "prefer-merged-type-literal-over-intersection": preferMergedTypeLiteral,
 };
 
-export const configs = {
+const configs = {
   recommended: {
     plugins: ["ts-type-preferences"],
     rules: {
@@ -17,3 +17,6 @@ export const configs = {
     },
   },
 };
+
+export { rules, configs };
+export default { rules, configs };

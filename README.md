@@ -243,7 +243,19 @@ export default [
 }
 ```
 
-### Recommended config (legacy .eslintrc)
+### Recommended config
+
+**Flat config (ESLint v9+)**
+
+```js
+import tsTypePreferences from "eslint-plugin-ts-type-preferences";
+
+export default [
+  tsTypePreferences.configs.recommended,
+];
+```
+
+**Legacy config (.eslintrc)**
 
 ```json
 {
